@@ -453,6 +453,204 @@
       min-width: 20px;
       text-align: right;
     }
+
+    /* ── DATE INDICATOR ── */
+    #date-indicator {
+      font-size: .75rem;
+      color: var(--slime-lime);
+      text-shadow: 0 0 10px var(--slime-lime);
+      letter-spacing: .04em;
+      white-space: nowrap;
+      padding: 4px 10px;
+      border: 1px solid var(--slime-lime);
+      border-radius: 8px;
+      background: rgba(173,255,2,.06);
+    }
+    #date-indicator.archived {
+      color: var(--bright-gold);
+      border-color: var(--bright-gold);
+      text-shadow: 0 0 10px var(--bright-gold);
+      background: rgba(255,221,0,.06);
+    }
+
+    /* ── DAY BANNER (archived view) ── */
+    #day-banner {
+      position: absolute;
+      top: 24px; left: 50%;
+      transform: translateX(-50%);
+      display: none;
+      align-items: center;
+      gap: 12px;
+      padding: 8px 16px;
+      border: 1px solid var(--bright-gold);
+      border-radius: 20px;
+      background: rgba(18,15,0,.85);
+      color: var(--bright-gold);
+      text-shadow: 0 0 8px var(--bright-gold);
+      box-shadow: 0 0 24px rgba(255,221,0,.2);
+      font-size: .8rem;
+      z-index: 300;
+    }
+    #day-banner.show { display: flex; }
+    #day-banner button {
+      border: 1px solid var(--bright-gold);
+      background: transparent;
+      color: var(--bright-gold);
+      border-radius: 8px;
+      padding: 3px 10px;
+      cursor: pointer;
+      font-size: .75rem;
+    }
+    #day-banner button:hover { background: rgba(255,221,0,.15); }
+
+    /* ── VAULT DRAWER ── */
+    #vault-backdrop {
+      position: fixed; inset: 0; z-index: 900;
+      background: rgba(0,0,0,.5);
+      opacity: 0; pointer-events: none;
+      transition: opacity .2s;
+    }
+    #vault-backdrop.show { opacity: 1; pointer-events: auto; }
+
+    #vault-drawer {
+      position: fixed; top: 0; left: 0; bottom: 0;
+      width: 300px; z-index: 901;
+      background: #0a0a0a;
+      border-right: 1px solid var(--board-border);
+      box-shadow: 0 0 40px rgba(173,255,2,.08);
+      transform: translateX(-105%);
+      transition: transform .22s ease;
+      display: flex; flex-direction: column;
+    }
+    #vault-drawer.open { transform: translateX(0); }
+    .vault-head {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 14px 16px;
+      border-bottom: 1px solid var(--toolbar-border);
+    }
+    .vault-head h2 {
+      font-size: 1rem; color: var(--slime-lime);
+      text-shadow: 0 0 10px var(--slime-lime);
+      letter-spacing: .04em;
+    }
+    .vault-head button {
+      background: transparent; border: 1px solid var(--border-dim);
+      color: var(--text-muted); border-radius: 6px;
+      width: 26px; height: 26px; cursor: pointer; font-size: 1rem; line-height: 1;
+    }
+    .vault-head button:hover { color: var(--neon-pink); border-color: var(--neon-pink); }
+    #vault-list { flex: 1; overflow: auto; padding: 10px; }
+    .vault-day {
+      display: flex; align-items: center; gap: 8px;
+      padding: 10px 12px; margin-bottom: 6px;
+      border: 1px solid var(--border-dim); border-radius: 10px;
+      cursor: pointer; color: var(--text-muted);
+      transition: border-color .15s, color .15s;
+    }
+    .vault-day:hover { border-color: var(--slime-lime); color: #fff; }
+    .vault-day.active { border-color: var(--slime-lime); color: var(--slime-lime); box-shadow: 0 0 14px rgba(173,255,2,.15); }
+    .vault-day .vd-date { font-size: .82rem; font-weight: 600; }
+    .vault-day .vd-meta { font-size: .7rem; color: var(--text-dim); margin-left: auto; white-space: nowrap; }
+    .vault-day .vd-badge {
+      font-size: .6rem; background: rgba(173,255,2,.12); color: var(--slime-lime);
+      border-radius: 8px; padding: 1px 6px; letter-spacing: .04em; text-transform: uppercase;
+    }
+    .vault-empty { color: var(--text-dim); font-size: .8rem; text-align: center; padding: 20px 0; }
+
+    /* ── MAIN LAYOUT ── */
+    #main {
+      flex: 1;
+      display: flex;
+      min-height: 0;
+    }
+
+    /* ── TODO PANEL ── */
+    #todo-panel {
+      width: 320px;
+      flex-shrink: 0;
+      display: flex;
+      flex-direction: column;
+      border-right: 1px solid var(--toolbar-border);
+      background: #070707;
+      min-height: 0;
+    }
+    .todo-head {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 14px 16px 8px;
+    }
+    .todo-head h2 {
+      font-size: 1rem; color: var(--slime-lime);
+      text-shadow: 0 0 10px var(--slime-lime); letter-spacing: .04em;
+    }
+    .todo-head .todo-count { font-size: .7rem; color: var(--text-dim); }
+    .todo-input-wrap { padding: 0 14px 12px; }
+    #todo-input {
+      width: 100%;
+      padding: 10px 12px;
+      border: 1px solid var(--border-dim);
+      border-radius: 10px;
+      background: rgba(173,255,2,.04);
+      color: #fff;
+      font-size: .85rem;
+      outline: none;
+      transition: border-color .15s, box-shadow .15s;
+    }
+    #todo-input:focus { border-color: var(--slime-lime); box-shadow: 0 0 12px rgba(173,255,2,.15); }
+    #todo-input::placeholder { color: var(--text-dim); }
+
+    #todo-list { flex: 1; overflow: auto; padding: 0 10px 10px; }
+    .todo-item {
+      display: flex; align-items: center; gap: 8px;
+      padding: 9px 10px; margin-bottom: 6px;
+      border: 1px solid var(--border-dim); border-radius: 10px;
+      background: rgba(255,255,255,.02);
+      color: #e8e8e8;
+      transition: border-color .15s, opacity .15s;
+    }
+    .todo-item:hover { border-color: rgba(173,255,2,.35); }
+    .todo-item.dragging { opacity: .5; border-style: dashed; }
+    .todo-item.dimmed { opacity: .25; }
+    .todo-item .todo-grip {
+      cursor: grab; color: var(--text-dim); user-select: none;
+      font-size: .8rem; letter-spacing: -1px;
+    }
+    .todo-item .todo-check {
+      width: 18px; height: 18px; border-radius: 50%;
+      border: 1.5px solid var(--slime-lime);
+      background: transparent; cursor: pointer; padding: 0;
+      display: inline-flex; align-items: center; justify-content: center;
+      color: var(--slime-lime); flex-shrink: 0;
+      transition: background .15s, box-shadow .15s;
+    }
+    .todo-item .todo-check:hover { box-shadow: 0 0 8px var(--slime-lime); }
+    .todo-item .todo-text {
+      flex: 1; font-size: .85rem; cursor: text; word-break: break-word;
+      line-height: 1.4;
+    }
+    .todo-item .todo-del {
+      background: transparent; border: none; color: var(--text-dim);
+      cursor: pointer; font-size: 1rem; line-height: 1; opacity: 0;
+      transition: opacity .15s, color .15s;
+    }
+    .todo-item:hover .todo-del { opacity: 1; }
+    .todo-item .todo-del:hover { color: var(--neon-pink); }
+    .todo-item.done { opacity: .5; }
+    .todo-item.done .todo-check { background: var(--slime-lime); }
+    .todo-item.done .todo-check::after { content: '✓'; color: #000; font-size: .65rem; line-height: 1; }
+    .todo-item.done .todo-text { text-decoration: line-through; color: var(--text-muted); }
+    .todo-edit {
+      flex: 1; background: transparent; border: none; border-bottom: 1px solid var(--slime-lime);
+      color: #fff; font-size: .85rem; outline: none; padding: 2px 0;
+    }
+    .todo-empty { color: var(--text-dim); font-size: .8rem; text-align: center; padding: 24px 0; }
+
+    .todo-foot { padding: 10px 14px; border-top: 1px solid var(--toolbar-border); }
+    .todo-foot button {
+      background: transparent; border: 1px solid var(--border-dim);
+      color: var(--text-muted); border-radius: 8px; padding: 4px 10px;
+      cursor: pointer; font-size: .72rem;
+    }
+    .todo-foot button:hover { color: var(--neon-pink); border-color: var(--neon-pink); }
   </style>
 </head>
 <body>
@@ -460,6 +658,7 @@
 <!-- ═══════════════════ TOOLBAR ═══════════════════ -->
 <div id="toolbar">
   <span class="logo">⬛ medic8d</span>
+  <span id="date-indicator">📅 Today</span>
   <div class="tb-sep"></div>
 
   <!-- Note colour picker -->
@@ -475,7 +674,7 @@
   <div class="tb-sep"></div>
 
   <!-- Add note -->
-  <button class="tb-btn" id="btn-add-note" title="Add a new note (click board or use this button)">＋ Note</button>
+  <button class="tb-btn" id="btn-add-note" title="Add a new note (N)">＋ Note</button>
   <div class="tb-sep"></div>
 
   <!-- Draw mode -->
@@ -488,7 +687,7 @@
   <div class="tb-sep"></div>
 
   <!-- Search -->
-  <input id="search-box" type="search" placeholder="🔍 search notes…" />
+  <input id="search-box" type="search" placeholder="🔍 search…" />
   <div class="tb-sep"></div>
 
   <!-- Zoom -->
@@ -506,18 +705,41 @@
   <button class="tb-btn danger" id="btn-clear" title="Clear all notes">🗑 Clear</button>
   <button class="tb-btn" id="btn-undo"  title="Undo last delete (Ctrl+Z)">↩ Undo</button>
   <div class="tb-sep"></div>
+  <button class="tb-btn" id="btn-vault" title="Open the day vault (V)">🗂 Vault</button>
   <button class="tb-btn" id="btn-shortcuts" title="Keyboard shortcuts">⌨ Keys</button>
 </div>
 
-<!-- ═══════════════════ BLACKBOARD ════════════════ -->
-<div id="board-wrap">
-  <div id="wb-outer">
-    <div id="wb-viewport">
-      <div id="whiteboard">
-        <canvas id="draw-canvas" width="2400" height="1800"></canvas>
-        <div id="wb-hint">
-          <p>🖊 Click anywhere to write a note</p>
-          <p><kbd>Del</kbd> delete selected &nbsp;·&nbsp; <kbd>Ctrl Z</kbd> undo &nbsp;·&nbsp; <kbd>Esc</kbd> deselect</p>
+<!-- ═══════════════════ MAIN ═══════════════════ -->
+<div id="main">
+  <!-- Todo list -->
+  <aside id="todo-panel">
+    <div class="todo-head">
+      <h2>☑ Todos</h2>
+      <span class="todo-count" id="todo-count"></span>
+    </div>
+    <div class="todo-input-wrap">
+      <input id="todo-input" type="text" placeholder="Add a todo… press Enter" autocomplete="off" />
+    </div>
+    <div id="todo-list"></div>
+    <div class="todo-foot">
+      <button id="btn-clear-done">Clear done</button>
+    </div>
+  </aside>
+
+  <!-- Blackboard -->
+  <div id="board-wrap">
+    <div id="wb-outer">
+      <div id="day-banner">
+        <span id="day-banner-text">Viewing archived day</span>
+        <button id="btn-back-today">Return to today</button>
+      </div>
+      <div id="wb-viewport">
+        <div id="whiteboard">
+          <canvas id="draw-canvas" width="2400" height="1800"></canvas>
+          <div id="wb-hint">
+            <p>🖊 Click anywhere to write a note</p>
+            <p><kbd>Del</kbd> delete selected &nbsp;·&nbsp; <kbd>Ctrl Z</kbd> undo &nbsp;·&nbsp; <kbd>Esc</kbd> deselect</p>
+          </div>
         </div>
       </div>
     </div>
@@ -530,6 +752,9 @@
     <h2>⌨ Keyboard Shortcuts</h2>
     <div class="shortcut-row"><span>Add note (button)</span>  <kbd>＋ Note</kbd></div>
     <div class="shortcut-row"><span>Add note (click)</span>   <kbd>Click</kbd></div>
+    <div class="shortcut-row"><span>New note</span>          <kbd>N</kbd></div>
+    <div class="shortcut-row"><span>Add todo</span>          <kbd>T</kbd></div>
+    <div class="shortcut-row"><span>Open vault</span>        <kbd>V</kbd></div>
     <div class="shortcut-row"><span>Edit note</span>        <kbd>Double-click</kbd></div>
     <div class="shortcut-row"><span>Toggle draw mode</span> <kbd>D</kbd></div>
     <div class="shortcut-row"><span>Deselect</span>         <kbd>Esc</kbd></div>
@@ -542,6 +767,16 @@
     <div class="shortcut-row"><span>Shortcuts</span>        <kbd>?</kbd></div>
     <button class="modal-close" id="modal-close-btn">Close</button>
   </div>
+</div>
+
+<!-- vault drawer -->
+<div id="vault-backdrop"></div>
+<div id="vault-drawer">
+  <div class="vault-head">
+    <h2>🗂 Vault</h2>
+    <button id="vault-close" title="Close">×</button>
+  </div>
+  <div id="vault-list"></div>
 </div>
 
 <!-- toast -->
@@ -562,13 +797,19 @@ marked.setOptions({
 });
 
 // ─── state ──────────────────────────────────────
-const STORAGE_KEY = 'md8d_notes_v2';
-let notes        = [];
-let selectedId   = null;
-let zCounter     = 10;
-let zoom         = 1;
-let undoStack    = [];
-let activeColor  = 'green';
+const VAULT_KEY      = 'md8d_vault_v1';
+const OLD_NOTES_KEY  = 'md8d_notes_v2';
+const OLD_DRAW_KEY   = 'md8d_drawing_v1';
+let vault         = { days: {} };
+let activeDay     = todayStr();
+let notes         = [];      // alias → activeDay's notes array
+let todos         = [];      // alias → activeDay's todos array
+let drawStrokes   = [];      // alias → activeDay's drawing array
+let selectedId    = null;
+let zCounter      = 10;
+let zoom          = 1;
+let undoStack     = [];
+let activeColor   = 'green';
 
 const NOTE_COLORS = {
   green:  '#0c1a0e',
@@ -599,11 +840,9 @@ const DRAW_COLORS = {
 };
 
 // ─── Draw mode state ────────────────────────────
-const DRAW_STORAGE_KEY = 'md8d_drawing_v1';
 let drawMode    = false;
 let isDrawing   = false;
 let brushSize   = 4;
-let drawStrokes = []; // [{color, size, points:[{x,y}]}]
 let currentStroke = null;
 
 const drawCanvas = document.getElementById('draw-canvas');
@@ -626,15 +865,88 @@ function showToast(msg, duration = 2000) {
   toastTimer = setTimeout(() => toast.classList.remove('show'), duration);
 }
 
-// ─── Persistence ────────────────────────────────
-function saveNotes() {
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(notes));
+// ─── Day helpers ────────────────────────────────
+function todayStr(d = new Date()) {
+  const y = d.getFullYear();
+  const m = String(d.getMonth() + 1).padStart(2, '0');
+  const day = String(d.getDate()).padStart(2, '0');
+  return `${y}-${m}-${day}`;
 }
-function loadNotes() {
+function escapeHtml(s) {
+  return String(s).replace(/[&<>"']/g, c => (
+    { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]
+  ));
+}
+function getDay(key) {
+  if (!vault.days[key]) vault.days[key] = { todos: [], notes: [], drawing: [] };
+  return vault.days[key];
+}
+function normalizeDay(d) {
+  if (!Array.isArray(d.todos)) d.todos = [];
+  if (!Array.isArray(d.notes)) d.notes = [];
+  if (!Array.isArray(d.drawing)) d.drawing = [];
+  return d;
+}
+function pointAliases() {
+  const d = normalizeDay(getDay(activeDay));
+  notes       = d.notes;
+  todos       = d.todos;
+  drawStrokes = d.drawing;
+}
+function formatDay(key) {
+  const [y, m, d] = key.split('-').map(Number);
+  const date = new Date(y, m - 1, d);
+  return date.toLocaleDateString(undefined, { weekday: 'short', month: 'short', day: 'numeric' });
+}
+
+// ─── Persistence ────────────────────────────────
+function saveVault() {
+  try { localStorage.setItem(VAULT_KEY, JSON.stringify(vault)); }
+  catch { showToast('Storage full — data not saved'); }
+}
+function saveNotes()  { saveVault(); renderVault(); }
+function loadVault() {
   try {
-    const raw = localStorage.getItem(STORAGE_KEY);
-    if (raw) { notes = JSON.parse(raw); }
-  } catch { notes = []; }
+    const raw = localStorage.getItem(VAULT_KEY);
+    if (raw) { vault = JSON.parse(raw); if (!vault.days) vault = { days: {} }; }
+  } catch { vault = { days: {} }; }
+}
+
+// ─── Migration from v1 ─────────────────────────
+function migrateFromV1() {
+  if (localStorage.getItem(VAULT_KEY)) return;
+  let oldNotes = [], oldDraw = [];
+  try { const r = localStorage.getItem(OLD_NOTES_KEY); if (r) oldNotes = JSON.parse(r); } catch {}
+  try { const r = localStorage.getItem(OLD_DRAW_KEY);  if (r) oldDraw  = JSON.parse(r); } catch {}
+  if (oldNotes.length || oldDraw.length) {
+    vault.days[todayStr()] = { todos: [], notes: oldNotes, drawing: oldDraw };
+    localStorage.removeItem(OLD_NOTES_KEY);
+    localStorage.removeItem(OLD_DRAW_KEY);
+    saveVault();
+  }
+}
+
+// convert any old note-as-todo into the dedicated todos list
+function migrateTodoNotes() {
+  let changed = false;
+  Object.values(vault.days).forEach(d => {
+    normalizeDay(d);
+    const leftovers = [];
+    d.notes.forEach(n => {
+      if (n.type === 'todo') {
+        const text = (n.content || '').trim();
+        if (text) {
+          d.todos.push({ id: n.id, text, done: !!n.done, order: d.todos.length });
+          changed = true;
+        }
+      } else {
+        delete n.type; delete n.done;
+        leftovers.push(n);
+      }
+    });
+    d.notes = leftovers;
+  });
+  if (changed) saveVault();
 }
 
 // ─── Hint ───────────────────────────────────────
@@ -826,7 +1138,7 @@ function cycleColor(note, el) {
 function deleteNote(id) {
   const idx = notes.findIndex(n => n.id === id);
   if (idx === -1) return;
-  undoStack.push({ note: { ...notes[idx] }, idx });
+  undoStack.push({ kind: 'note', note: { ...notes[idx] }, day: activeDay });
   notes.splice(idx, 1);
   const el = document.getElementById('note-' + id);
   if (el) el.remove();
@@ -837,11 +1149,19 @@ function deleteNote(id) {
 
 function undoDelete() {
   if (undoStack.length === 0) { showToast('Nothing to undo'); return; }
-  const { note } = undoStack.pop();
-  notes.push(note);
-  createNoteEl(note);
+  const entry = undoStack.pop();
+  const target = entry.day || activeDay;
+  const dayData = normalizeDay(getDay(target));
+  if (entry.kind === 'todo') {
+    dayData.todos.push(entry.todo);
+    if (target === activeDay) { pointAliases(); renderTodos(); }
+    showToast('Undo: todo restored');
+  } else {
+    dayData.notes.push(entry.note);
+    if (target === activeDay) createNoteEl(entry.note);
+    showToast('Undo: note restored');
+  }
   saveNotes(); updateHint();
-  showToast('Undo: note restored');
 }
 
 // ─── Click board → add note ──────────────────────
@@ -899,12 +1219,12 @@ document.getElementById('btn-export-png').onclick = async () => {
 
 // ─── Export / Import JSON ────────────────────────
 document.getElementById('btn-export-json').onclick = () => {
-  const blob = new Blob([JSON.stringify(notes, null, 2)], { type: 'application/json' });
+  const blob = new Blob([JSON.stringify({ version: 2, days: vault.days }, null, 2)], { type: 'application/json' });
   const a = document.createElement('a');
   a.href = URL.createObjectURL(blob);
-  a.download = 'blackboard-notes.json';
+  a.download = 'blackboard-vault.json';
   a.click();
-  showToast('JSON exported ✓');
+  showToast('Vault exported ✓');
 };
 
 document.getElementById('btn-import-json').onclick = () =>
@@ -916,15 +1236,32 @@ document.getElementById('file-import').onchange = e => {
   const reader = new FileReader();
   reader.onload = ev => {
     try {
-      const imported = JSON.parse(ev.target.result);
-      if (!Array.isArray(imported)) throw new Error();
-      imported.forEach(n => {
-        if (!notes.find(x => x.id === n.id)) {
-          notes.push(n); createNoteEl(n);
-        }
-      });
-      saveNotes(); updateHint();
-      showToast(`Imported ${imported.length} note(s) ✓`);
+      const data = JSON.parse(ev.target.result);
+      if (Array.isArray(data)) {
+        // v1 notes array → today's day
+        const day = getDay(todayStr());
+        data.forEach(n => {
+          if (!day.notes.find(x => x.id === n.id)) day.notes.push(n);
+        });
+        migrateColors(day.notes);
+        pointAliases(); renderBoard(); renderVault();
+        showToast(`Imported ${data.length} note(s) into today ✓`);
+      } else if (data && data.days) {
+        // v2 vault
+        let count = 0;
+        Object.keys(data.days).forEach(key => {
+          const src = data.days[key];
+          const day = getDay(key);
+          (src.notes || []).forEach(n => {
+            if (!day.notes.find(x => x.id === n.id)) { day.notes.push(n); count++; }
+          });
+          if (Array.isArray(src.drawing)) day.drawing = src.drawing;
+        });
+        Object.values(vault.days).forEach(d => migrateColors(d.notes));
+        pointAliases(); renderBoard(); renderVault();
+        showToast(`Imported ${count} note(s) ✓`);
+      } else throw new Error();
+      saveVault();
     } catch { showToast('Invalid JSON file'); }
   };
   reader.readAsText(file);
@@ -934,13 +1271,13 @@ document.getElementById('file-import').onchange = e => {
 // ─── Clear all ───────────────────────────────────
 document.getElementById('btn-clear').onclick = () => {
   if (!notes.length) { showToast('Board is empty'); return; }
-  if (!confirm('Erase all notes?')) return;
-  [...notes].reverse().forEach((n, i) => undoStack.push({ note: { ...n }, idx: i }));
-  notes = [];
+  if (!confirm('Erase all notes for this day?')) return;
+  [...notes].forEach(n => undoStack.push({ note: { ...n }, day: activeDay }));
+  notes.length = 0;
   wb.querySelectorAll('.note').forEach(el => el.remove());
   selectedId = null;
   saveNotes(); updateHint();
-  showToast('Board cleared · Ctrl+Z to undo last');
+  showToast('Day cleared · Ctrl+Z to undo');
 };
 
 document.getElementById('btn-undo').onclick = undoDelete;
@@ -996,8 +1333,17 @@ document.addEventListener('keydown', e => {
   if (e.key === '?') {
     document.getElementById('shortcuts-modal').classList.toggle('open');
   }
-  if (e.key.toLowerCase() === 'd') {
+  if (e.key.toLowerCase() === 'd' && !e.ctrlKey && !e.metaKey && !e.altKey) {
     toggleDrawMode();
+  }
+  if (e.key.toLowerCase() === 'n' && !e.ctrlKey && !e.metaKey && !e.altKey) {
+    addNote();
+  }
+  if (e.key.toLowerCase() === 't' && !e.ctrlKey && !e.metaKey && !e.altKey) {
+    e.preventDefault(); todoInput.focus();
+  }
+  if (e.key.toLowerCase() === 'v' && !e.ctrlKey && !e.metaKey && !e.altKey) {
+    openVault();
   }
 });
 
@@ -1055,18 +1401,7 @@ function renderStroke(stroke) {
   drawCtx.restore();
 }
 
-function saveDrawing() {
-  try {
-    localStorage.setItem(DRAW_STORAGE_KEY, JSON.stringify(drawStrokes));
-  } catch { showToast('Drawing too large to save'); }
-}
-
-function loadDrawing() {
-  try {
-    const raw = localStorage.getItem(DRAW_STORAGE_KEY);
-    if (raw) { drawStrokes = JSON.parse(raw); }
-  } catch { drawStrokes = []; }
-}
+function saveDrawing() { saveVault(); }
 
 function getCanvasPos(e) {
   const rect = drawCanvas.getBoundingClientRect();
@@ -1137,7 +1472,7 @@ function toggleDrawMode() {
   }
 }
 
-document.getElementById('btn-add-note').onclick = () => {
+function addNote() {
   // place new note near the centre of the visible viewport
   const vx = wbViewport.scrollLeft + wbViewport.clientWidth  / 2;
   const vy = wbViewport.scrollTop  + wbViewport.clientHeight / 2;
@@ -1155,14 +1490,16 @@ document.getElementById('btn-add-note').onclick = () => {
   const editor  = el.querySelector('.note-editor');
   const preview = el.querySelector('.note-preview');
   enterEditMode(note, el, editor, preview);
-};
+}
+
+document.getElementById('btn-add-note').onclick = () => addNote();
 
 document.getElementById('btn-draw-mode').onclick = toggleDrawMode;
 
 document.getElementById('btn-clear-draw').onclick = () => {
   if (!drawStrokes.length) { showToast('Nothing to erase'); return; }
   if (!confirm('Erase all drawing?')) return;
-  drawStrokes = [];
+  drawStrokes.length = 0;
   drawCtx.clearRect(0, 0, drawCanvas.width, drawCanvas.height);
   saveDrawing();
   showToast('Drawing erased');
@@ -1175,13 +1512,208 @@ brushSlider.oninput = () => {
   brushLabelEl.textContent = brushSize + 'px';
 };
 
+// ─── Todos ──────────────────────────────────────
+const todoInput   = document.getElementById('todo-input');
+const todoListEl  = document.getElementById('todo-list');
+const todoCountEl = document.getElementById('todo-count');
+
+function renderTodos() {
+  todoListEl.innerHTML = '';
+  todos.forEach(renderTodo);
+  updateTodoCount();
+}
+function updateTodoCount() {
+  const total = todos.length;
+  const done  = todos.filter(t => t.done).length;
+  todoCountEl.textContent = total ? `${done}/${total}` : '';
+}
+function addTodo() {
+  const text = todoInput.value.trim();
+  if (!text) return;
+  const item = { id: 't' + Date.now(), text, done: false, order: todos.length };
+  todos.push(item);
+  todoInput.value = '';
+  renderTodo(item);
+  updateTodoCount();
+  saveNotes();
+  todoInput.focus();
+}
+function renderTodo(item) {
+  const row = document.createElement('div');
+  row.className = 'todo-item' + (item.done ? ' done' : '');
+  row.dataset.id = item.id;
+  row.draggable = true;
+  row.innerHTML = `
+    <span class="todo-grip" title="Drag to reorder">⠿</span>
+    <button class="todo-check" title="Mark done / undone"></button>
+    <span class="todo-text">${escapeHtml(item.text)}</span>
+    <button class="todo-del" title="Delete">✕</button>
+  `;
+
+  row.querySelector('.todo-check').onclick = e => {
+    e.stopPropagation();
+    item.done = !item.done;
+    row.classList.toggle('done', item.done);
+    updateTodoCount();
+    saveNotes();
+  };
+  row.querySelector('.todo-del').onclick = e => {
+    e.stopPropagation();
+    deleteTodo(item.id, row);
+  };
+  row.querySelector('.todo-text').ondblclick = () => beginTodoEdit(item, row);
+  row.querySelector('.todo-grip').addEventListener('mousedown', e => e.stopPropagation());
+
+  todoListEl.appendChild(row);
+}
+function beginTodoEdit(item, row) {
+  const textEl = row.querySelector('.todo-text');
+  const input = document.createElement('input');
+  input.className = 'todo-edit';
+  input.type = 'text';
+  input.value = item.text;
+  textEl.replaceWith(input);
+  input.focus();
+  input.select();
+  let committed = false;
+  const commit = () => {
+    if (committed) return;
+    committed = true;
+    const v = input.value.trim();
+    if (v) item.text = v;
+    const span = document.createElement('span');
+    span.className = 'todo-text';
+    span.textContent = item.text;
+    span.ondblclick = () => beginTodoEdit(item, row);
+    input.replaceWith(span);
+    saveNotes();
+  };
+  input.onblur = commit;
+  input.onkeydown = e => {
+    if (e.key === 'Enter') { e.preventDefault(); commit(); }
+    else if (e.key === 'Escape') { input.value = item.text; input.blur(); }
+  };
+}
+function deleteTodo(id, row) {
+  const i = todos.findIndex(t => t.id === id);
+  if (i < 0) return;
+  const item = todos.splice(i, 1)[0];
+  undoStack.push({ kind: 'todo', todo: item, day: activeDay });
+  if (row) row.remove();
+  updateTodoCount();
+  saveNotes();
+  showToast('Todo deleted — Ctrl/⌘ Z to undo');
+}
+todoInput.addEventListener('keydown', e => {
+  if (e.key === 'Enter') { e.preventDefault(); addTodo(); }
+});
+document.getElementById('btn-clear-done').onclick = () => {
+  const before = todos.length;
+  const dayData = getDay(activeDay);
+  dayData.todos = dayData.todos.filter(t => !t.done);
+  pointAliases();
+  renderTodos();
+  if (todos.length < before) { saveNotes(); showToast('Cleared done todos'); }
+};
+
+// ─── Day switching / vault ─────────────────────
+function clearBoard() {
+  wb.querySelectorAll('.note').forEach(el => el.remove());
+  drawCtx.clearRect(0, 0, drawCanvas.width, drawCanvas.height);
+  selectedId = null;
+}
+
+function renderBoard() {
+  notes.forEach(createNoteEl);
+  renderTodos();
+  updateHint();
+  redrawCanvas();
+  updateDateHeader();
+}
+
+function updateDateHeader() {
+  const isToday = activeDay === todayStr();
+  const el = document.getElementById('date-indicator');
+  el.textContent = '📅 ' + (isToday ? 'Today · ' : '') + formatDay(activeDay);
+  el.classList.toggle('archived', !isToday);
+  const banner = document.getElementById('day-banner');
+  banner.classList.toggle('show', !isToday);
+  if (!isToday) {
+    document.getElementById('day-banner-text').textContent =
+      'Viewing archived day · ' + formatDay(activeDay);
+  }
+}
+
+function switchDay(key) {
+  if (key === activeDay) { closeVault(); return; }
+  saveVault();
+  activeDay = key;
+  getDay(key);
+  pointAliases();
+  clearBoard();
+  renderBoard();
+  renderVault();
+  closeVault();
+}
+
+function renderVault() {
+  const list = document.getElementById('vault-list');
+  const keys = Object.keys(vault.days).sort().reverse();
+  if (!keys.length) {
+    list.innerHTML = '<div class="vault-empty">No days yet</div>';
+    return;
+  }
+  const today = todayStr();
+  list.innerHTML = keys.map(key => {
+    const d = normalizeDay(vault.days[key]);
+    const done = d.todos.filter(t => t.done).length;
+    const isToday = key === today;
+    const badge = isToday ? '<span class="vd-badge">today</span>'
+                          : (key === activeDay ? '<span class="vd-badge">open</span>' : '');
+    const label = isToday ? 'Today' : formatDay(key);
+    const meta = d.notes.length
+      ? `${d.notes.length} note${d.notes.length > 1 ? 's' : ''}`
+      : 'empty';
+    const todoMeta = d.todos.length
+      ? ` · ${d.todos.length} todo${d.todos.length > 1 ? 's' : ''}${done ? ` (${done}✓)` : ''}`
+      : '';
+    return `<div class="vault-day ${key === activeDay ? 'active' : ''}" data-day="${key}">
+      <span class="vd-date">${label}</span>
+      ${badge}
+      <span class="vd-meta">${meta}${todoMeta}</span>
+    </div>`;
+  }).join('');
+}
+
+function openVault() {
+  renderVault();
+  document.getElementById('vault-drawer').classList.add('open');
+  document.getElementById('vault-backdrop').classList.add('show');
+}
+function closeVault() {
+  document.getElementById('vault-drawer').classList.remove('open');
+  document.getElementById('vault-backdrop').classList.remove('show');
+}
+
+document.getElementById('btn-vault').onclick = openVault;
+document.getElementById('vault-close').onclick = closeVault;
+document.getElementById('vault-backdrop').onclick = closeVault;
+document.getElementById('btn-back-today').onclick = () => switchDay(todayStr());
+document.getElementById('vault-list').addEventListener('click', e => {
+  const row = e.target.closest('.vault-day');
+  if (row) switchDay(row.dataset.day);
+});
+
 // ─── Boot ────────────────────────────────────────
-loadNotes();
-migrateColors(notes);
-notes.forEach(createNoteEl);
-updateHint();
-loadDrawing();
-redrawCanvas();
+loadVault();
+migrateFromV1();
+migrateTodoNotes();
+Object.values(vault.days).forEach(d => migrateColors(d.notes));
+activeDay = todayStr();
+getDay(activeDay);
+pointAliases();
+renderBoard();
+renderVault();
 </script>
 </body>
 </html>
